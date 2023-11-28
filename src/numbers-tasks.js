@@ -9,7 +9,7 @@
 
 /**
  * Returns an area of a rectangle given by width and height.
- *
+ * Надо найти площадь прямоугольника, формула S = a ⋅ b
  * @param {number} width
  * @param {number} height
  * @return {number}
@@ -18,13 +18,13 @@
  *   5, 10 => 50
  *   5, 5  => 25
  */
-function getRectangleArea(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleArea(width, height) {
+  return width * height;
 }
 
 /**
  * Returns a circumference of circle given by radius.
- *
+ * Нужно найти длину окружности зная радиус. Для этого применяем формулу C = 2πr
  * @param {number} radius
  * @return {number}
  *
@@ -33,13 +33,14 @@ function getRectangleArea(/* width, height */) {
  *   3.14 => 19.729201864543903
  *   0    => 0
  */
-function getCircleCircumference(/* radius */) {
-  throw new Error('Not implemented');
+function getCircleCircumference(radius) {
+  // Свойство Math.PI представляет отношение длины окружности круга к его диаметру, приблизительно равное 3,14159
+  return 2 * Math.PI * radius;
 }
 
 /**
  * Returns an average of two given numbers.
- *
+ * Нужно вернуть среднее значение двух заданных числе, т.е. разделить пополам 1 значение и второе, сложить их
  * @param {number} value1
  * @param {number} value2
  * @return {number}
@@ -49,13 +50,18 @@ function getCircleCircumference(/* radius */) {
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-function getAverage(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function getAverage(value1, value2) {
+  const a = value1 / 2;
+  const b = value2 / 2;
+  return a + b;
 }
 
 /**
  * Returns a distance between two points by cartesian coordinates.
- *
+ * Расстояние между двумя точками в декартовой системе координат можно вычислить
+ * с использованием формулы для расстояния между двумя точками в двухмерном пространстве.
+ * Формула выглядит следующим образом:
+ * A = √ ((X2-X1)²+(Y2-Y1)²).
  * @param {number} x1
  * @param {number} y1
  * @param {number} x2
@@ -68,13 +74,26 @@ function getAverage(/* value1, value2 */) {
  *   (0,0) (1,0)    => 1
  *   (-5,0) (10,-10) => 18.027756377319946
  */
-function getDistanceBetweenPoints(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getDistanceBetweenPoints(x1, y1, x2, y2) {
+  // const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)); <- не получилось)
+  // Метод Math.sqrt() возвращает квадратный корень числа
+  // Метод Math.pow() возвращает основание, возведённое в степень.Math.pow(base, exponent)
+  const distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+  return distance;
 }
 
 /**
  * Returns a root of linear equation a*x + b = 0 given by coefficients a and b.
- *
+ * Линейное уравнение с одной переменной x – это уравнение вида a⋅x+b=0, где a и b
+ * – некоторые числа, называемые коэффициентами линейного уравнения.
+ * Эта функция вычисляет корень линейного уравнения a⋅x+b=0 для заданных коэффициентов
+ * a и b. Вспомним, что корень линейного уравнения можно выразить формулой:
+ * x = -b / a
+ * Алгоритм решения если а не равно 0, то решением уравнения является x=−b/a;
+ * при a≠0 линейное уравнение имеет единственный корень x=−b/a;
+ * при a = 0 и b≠0линейное уравнение не имеет корней;
+ * при a=0 и b = 0 линейное уравнение имеет бесконечно много корней.
+ * По сути в данном случае любое число может стать корнем линейного уравнения.
  * @param {number} a
  * @param {number} b
  * @return {number}
@@ -84,8 +103,13 @@ function getDistanceBetweenPoints(/* x1, y1, x2, y2 */) {
  *   x + 8 = 0       => -8
  *   5*x = 0         => 0
  */
-function getLinearEquationRoot(/* a, b */) {
-  throw new Error('Not implemented');
+function getLinearEquationRoot(a, b) {
+  if (a === 0) {
+    throw new Error('Not implemented');
+  } else {
+    const res = -b / a;
+    return res;
+  }
 }
 
 /**
