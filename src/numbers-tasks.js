@@ -136,7 +136,9 @@ function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
 /**
  * Returns a last digit of a integer number.
  * The input parameter will always be greater than or equal to zero and will be in decimal notation.
- *
+ * Эта функция возвращает последнюю цифру целого числа.
+ * Для выполнения этой задачи мы можем воспользоваться операцией взятия остатка от деления на 10.
+ * Последняя цифра числа именно тот остаток, который мы получим от деления числа на 10.
  * @param {number} value
  * @return {number}
  *
@@ -146,13 +148,20 @@ function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
  *     5     => 5
  *     0     => 0
  */
-function getLastDigit(/* value */) {
-  throw new Error('Not implemented');
+function getLastDigit(value) {
+  const res = value % 10;
+  return res;
 }
 
 /**
  * Returns a number by given string representation.
- *
+ * Нужно строку вернуть числом
+ * Можно через унарный метод сделать +value
+ * либо через функцию parseFloat()
+ * Функция parseFloat() принимает строку в качестве аргумента и возвращает десятичное число (число с плавающей точкой)
+ * const number = parseFloat(value);
+ * Функция parseInt() преобразует строку в число и возвращает целочисленное значение.
+ * Number(str)
  * @param {string} value
  * @return {number}
  *
@@ -161,13 +170,19 @@ function getLastDigit(/* value */) {
  *     '37'     => 37
  * '-525.5'     => -525.5
  */
-function parseNumberFromString(/* value */) {
-  throw new Error('Not implemented');
+function parseNumberFromString(value) {
+  const res = +value;
+  return res;
 }
 
 /**
  * Returns a diagonal length of the rectangular parallelepiped given by its sides a,b,c.
- *
+ * Чтобы найти диагональ прямоугольного параллелепипеда, мы можем воспользоваться теоремой Пифагора для трехмерного пространства.
+ * Обычная теорема Пифагора легко обобщается и на случай трёхмерного пространства.
+ * Диагональ прямоугольного параллелепипеда равна корню квадратному из суммы квадратов трёх его измерений.
+ * Если размеры параллелепипеда a, b и c, то его диагональ d равна
+ * Формула для диагонали d выглядит следующим образом:
+ * d = √(a^2 + b^2 + c^2).
  * @param {number} a
  * @param {number} b
  * @param {number} c
@@ -178,13 +193,22 @@ function parseNumberFromString(/* value */) {
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-function getParallelepipedDiagonal(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getParallelepipedDiagonal(a, b, c) {
+  const res = Math.sqrt(a * a + b * b + c * c);
+  return res;
 }
 
 /**
  * Returns the number rounded to specified power of 10.
- *
+ * Насколько я понял задачу у нас есть num и pow, и нужно 10 возвести в pow
+ * после чего округлить числа используя то число которое получилось из 10 в степени pow
+ * то есть как то так:
+ * фактор = 10 в степени pow
+ * если число pow положительное то мы делаем так, если отрицательное то так
+ * возьмем пример (1678, 3)
+ * 10**3 = 1000
+
+ * Math.round(1678 / 1000) => 1,678 => Math.round округляет до 2, дальше 2 * 1000 => 2000!
  * @param {number} num
  * @param {number} pow
  * @return {number}
@@ -199,8 +223,10 @@ function getParallelepipedDiagonal(/* a, b, c */) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
+function roundToPowerOfTen(num, pow) {
+  const power = 10 ** pow;
+
+  return Math.round(num / power) * power;
 }
 
 /**
