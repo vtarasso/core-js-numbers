@@ -232,7 +232,10 @@ function roundToPowerOfTen(num, pow) {
 /**
  * Returns true is the number is prime; otherwise false.
  * See: https://en.wikipedia.org/wiki/Primality_test
- *
+ * Возвращает тру если число простое и фолсе в обратном случае
+ * Называется тестом простоты
+ * Простое число - это число, которое делится только на 1 и на само себя.
+ * Если число делится на другие числа, кроме 1 и самого себя, оно не является простым.
  * @param {number} n
  * @return {bool}
  *
@@ -246,14 +249,20 @@ function roundToPowerOfTen(num, pow) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
+function isPrime(n) {
+  for (let i = 2; i <= n / 2; i += 1) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
  * Tries to convert value to number and returns it if conversion was successful;
  * otherwise returns default value passed as a second argument.
- *
+ * Пытается преобразовать значение в число и возвращает его, если преобразование прошло успешно;
+ * в противном случае возвращает значение по умолчанию, переданное в качестве второго аргумента.
  * @param {any} value
  * @param {any} def
  * @return {number}
@@ -265,13 +274,13 @@ function isPrime(/* n */) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  return +value ? +value : def;
 }
 
 /**
  * Returns the cube of the given number.
- *
+ * Возвращает куб заданного числа. Изи задача, нужно возвести числов 3 степень
  * @param {number} num
  * @return {number}
  *
@@ -280,8 +289,8 @@ function toNumber(/* value, def */) {
  *   -2 => -8
  *   0  => 0
  */
-function getCube(/* num */) {
-  throw new Error('Not implemented');
+function getCube(num) {
+  return num ** 3;
 }
 
 /**
@@ -303,7 +312,7 @@ function getFibonacciNumber(/* index */) {
 
 /**
  * Returns the sum of all numbers from 1 to n.
- *
+ * Возвращает сумму всех чисел от 1 до n.
  * @param {number} n
  * @return {number}
  *
@@ -312,13 +321,19 @@ function getFibonacciNumber(/* index */) {
  *   10 => 55 // (1+2+3+...+10)
  *   1  => 1
  */
-function getSumToN(/* n */) {
-  throw new Error('Not implemented');
+function getSumToN(n) {
+  let sum = 0;
+
+  for (let i = 1; i <= n; i += 1) {
+    sum += i;
+  }
+
+  return sum;
 }
 
 /**
  * Returns the sum of the digits of a given number.
- *
+ * Возвращает сумму цифр заданного числа. Недоконца разобрался
  * @param {number} num
  * @return {number}
  *
@@ -327,13 +342,22 @@ function getSumToN(/* n */) {
  *   202 => 4  // (2+0+2)
  *   5   => 5  // 5
  */
-function getSumOfDigits(/* num */) {
-  throw new Error('Not implemented');
+function getSumOfDigits(num) {
+  let sum = 0;
+  let number = num;
+  // Пока число не равно 0
+  while (number !== 0) {
+    // Извлекаем последнюю цифру и добавляем к сумме
+    sum += number % 10;
+    // Удаляем последнюю цифру
+    number = Math.floor(number / 10);
+  }
+  return sum;
 }
 
 /**
  * Returns true if the given number is a power of two, false otherwise.
- *
+ * Возвращает true, если заданное число является степенью двойки, иначе - false.
  * @param {number} num
  * @return {boolean}
  *
@@ -342,13 +366,13 @@ function getSumOfDigits(/* num */) {
  *   16  => true
  *   15  => false
  */
-function isPowerOfTwo(/* num */) {
-  throw new Error('Not implemented');
+function isPowerOfTwo(num) {
+  return Math.log2(num) % 1 === 0;
 }
 
 /**
  * Returns the sine of a number.
- *
+ * Возвращает синус заданного числа.
  * @param {number} num
  * @return {number}
  *
@@ -356,13 +380,14 @@ function isPowerOfTwo(/* num */) {
  *   0 => 0
  *   Math.PI / 2 => 1
  */
-function getSine(/* num */) {
-  throw new Error('Not implemented');
+function getSine(num) {
+  // Метод Math.sin() возвращает синус числа.
+  return Math.sin(num);
 }
 
 /**
  * Returns a string representation of a number in a specified base (radix).
- *
+ * Возвращает строковое представление числа в указанном основании (системе счисления).
  * @param {number} number
  * @param {number} base
  * @return {string}
@@ -371,8 +396,9 @@ function getSine(/* num */) {
  * 255, 16 => 'ff'
  * 2, 2    => '10'
  */
-function numberToStringInBase(/* number, base */) {
-  throw new Error('Not implemented');
+function numberToStringInBase(number, base) {
+  // Используем метод toString с указанием основания
+  return number.toString(base);
 }
 
 /**
@@ -391,7 +417,8 @@ function toExponential(/* number, fractionDigits */) {
 
 /**
  * Returns a string representation of a number in fixed-point notation.
- *
+ * Возвращает строковое представление числа в формате с фиксированным количеством знаков после запятой.
+ * Метод toFixed() форматирует число, используя запись с фиксированной запятой. Переводит число в строку при выводе результата
  * @param {number} number
  * @param {number} fractionDigits
  * @return {string}
@@ -400,8 +427,8 @@ function toExponential(/* number, fractionDigits */) {
  * 12345, 2    => '12345.00'
  * 12.345, 1   => '12.3'
  */
-function toFixed(/* number, fractionDigits */) {
-  throw new Error('Not implemented');
+function toFixed(number, fractionDigits) {
+  return number.toFixed(fractionDigits);
 }
 
 /**
