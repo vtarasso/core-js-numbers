@@ -403,7 +403,7 @@ function numberToStringInBase(number, base) {
 
 /**
  * Returns a string representation of a number in exponential notation.
- *
+ * Возвращает строковое представление числа в экспоненциальной записи
  * @param {number} number
  * @param {number} fractionDigits
  * @return {string}
@@ -411,8 +411,10 @@ function numberToStringInBase(number, base) {
  * @example:
  * 12345, 2    => '1.23e+4'
  */
-function toExponential(/* number, fractionDigits */) {
-  throw new Error('Not implemented');
+function toExponential(number, fractionDigits) {
+  // Метод toExponential() возвращает строку, представляющую объект Number в экспоненциальной записи.
+  // Преобразовываем число в экспоненциальную запись с указанным количеством знаков после запятой
+  return number.toExponential(fractionDigits);
 }
 
 /**
@@ -434,7 +436,8 @@ function toFixed(number, fractionDigits) {
 /**
  * Returns a string representation of a number in normal (fixed-point or exponential)
  * notation rounded to precision significant digits.
- *
+ * Возвращает строковое представление числа в нормальной (фиксированной точности или экспоненциальной) записи,
+ * округленное до указанного количества значащих цифр.
  * @param {number} number
  * @param {number} precision
  * @return {string}
@@ -443,13 +446,17 @@ function toFixed(number, fractionDigits) {
  * 12345, 7    => '12345.00'
  * 12.345, 4   => '12.35'
  */
-function toPrecision(/* number, precision */) {
-  throw new Error('Not implemented');
+function toPrecision(number, precision) {
+  // Метод toPrecision() возвращает строку, представляющую объект Number с указанной точностью.
+  // Используем метод toPrecision для форматирования числа с указанной точностью
+  return number.toPrecision(precision);
 }
 
 /**
  * Returns the primitive value of a Number object.
- *
+ * Возвращает примитивное значение объекта Number.
+ * Метод valueOf() возвращает примитивное значение указанного объекта, т.е. из непримитивного типа данных делает примитивный тип данных
+ * @param {Number} number
  * @param {Number} number
  * @return {number}
  *
@@ -457,13 +464,13 @@ function toPrecision(/* number, precision */) {
  * new Number(5) => 5
  * Number(-5)    => -5
  */
-function getNumberValue(/* number */) {
-  throw new Error('Not implemented');
+function getNumberValue(number) {
+  return number.valueOf();
 }
 
 /**
  * Returns a boolean value indicating whether the parameter is a number or not.
- *
+ * Возвращает булево значение, указывающее, является ли параметр числом.
  * @param {number} number
  * @return {boolean}
  *
@@ -476,13 +483,16 @@ function getNumberValue(/* number */) {
  * 5        => true
  * '5'      => false
  */
-function isNumber(/* number */) {
-  throw new Error('Not implemented');
+function isNumber(number) {
+  // Эта функция использует оператор typeof, чтобы проверить, является ли переданный параметр числом, а затем проверяет, является ли число конечным с помощью isFinite
+  return typeof number === 'number' && Number.isFinite(number);
+  // Функция isNaN() определяет является ли литерал или переменная нечисловым значением (NaN) или нет.
+  //  return typeof number === 'number' && !isNaN(number);
 }
 
 /**
  * Returns a boolean value indicating whether a number is an integer or not.
- *
+ * Возвращает булево значение, указывающее, является ли число целым.
  * @param {number} number
  * @return {boolean}
  *
@@ -491,13 +501,16 @@ function isNumber(/* number */) {
  * 5.1  => false
  * '5'  => false
  */
-function isInteger(/* number */) {
-  throw new Error('Not implemented');
+function isInteger(number) {
+  // Метод Number.isInteger() определяет, является ли переданное значение целым числом.
+  return Number.isInteger(number);
 }
 
 /**
  * Returns a floating point number or, if the number cannot be parsed from the argument, returns NaN.
- *
+ * Возвращает число с плавающей точкой или NaN, если число не может быть извлечено из аргумента.
+ * Для извлечения числа из строки можно воспользоваться функцией parseFloat().
+ * Эта функция пытается преобразовать строку в число с плавающей точкой. Если преобразование невозможно, она вернет NaN.
  * @param {string} str
  * @return {number | NaN}
  *
@@ -505,14 +518,15 @@ function isInteger(/* number */) {
  * '4.567abcdefgh' => 4.567
  * 'abcdefgh'      => NaN
  */
-function getFloatOnString(/* str */) {
-  throw new Error('Not implemented');
+function getFloatOnString(str) {
+  return Number.parseFloat(str);
 }
 
 /**
  * Returns an integer of the specified base or, if the number cannot be parsed
  * from the argument, returns NaN.
- *
+ * Возвращает целое число в указанной системе счисления или NaN,
+ * если число не может быть извлечено из аргумента.
  * @param {string} str
  * @param {number} base
  * @return {number | NaN}
@@ -523,13 +537,14 @@ function getFloatOnString(/* str */) {
  * '1.234', 2           => 1
  * '10', 8              => 8
  */
-function getIntegerOnString(/* str, base */) {
-  throw new Error('Not implemented');
+function getIntegerOnString(str, base) {
+  // Функция parseInt() принимает строку в качестве аргумента и возвращает целое число в соответствии с указанным основанием системы счисления.
+  return Number.parseInt(str, base);
 }
 
 /**
  * Returns whether a number is a safe integer.
- *
+ * Возвращает булево значение, указывающее, является ли число "safe integer".
  * @param {number} number
  * @return {boolean}
  *
@@ -538,13 +553,14 @@ function getIntegerOnString(/* str, base */) {
  * 3.5      => false
  * 2 ** 53  => false
  */
-function isSafeInteger(/* number */) {
-  throw new Error('Not implemented');
+function isSafeInteger(number) {
+  // Метод Number.isSafeInteger() определяет, является ли переданное значение безопасным целым числом.
+  return Number.isSafeInteger(number);
 }
 
 /**
  * Returns the smallest integer less than or equal to a given number.
- *
+ * Возвращает наименьшее целое число, меньшее или равное заданному числу.
  * @param {number} number
  * @return {number}
  *
@@ -552,13 +568,14 @@ function isSafeInteger(/* number */) {
  * 5.9  => 5
  * -5.1 => -6
  */
-function roundToSmallestInteger(/* number */) {
-  throw new Error('Not implemented');
+function roundToSmallestInteger(number) {
+  // Метод Math.floor() - округление вниз. Округляет аргумент до ближайшего меньшего целого.
+  return Math.floor(number);
 }
 
 /**
  * Returns the largest integer greater than or equal to a given number.
- *
+ * Возвращает наибольшее целое число, большее или равное заданному числу.
  * @param {number} number
  * @return {number}
  *
@@ -566,13 +583,14 @@ function roundToSmallestInteger(/* number */) {
  * 5.1  => 6
  * -5.9 => -5
  */
-function roundToLargestInteger(/* number */) {
-  throw new Error('Not implemented');
+function roundToLargestInteger(number) {
+  // Метод Math.ceil() - округление вверх. Округляет аргумент до ближайшего большего целого.
+  return Math.ceil(number);
 }
 
 /**
  * Returns the value of a number rounded to the nearest integer.
- *
+ * Возвращает значение числа, округленное до ближайшего целого числа.
  * @param {number} number
  * @return {number}
  *
@@ -581,13 +599,14 @@ function roundToLargestInteger(/* number */) {
  * 5.4  => 5
  * -5.5 => -5
  */
-function roundToNearestInteger(/* number */) {
-  throw new Error('Not implemented');
+function roundToNearestInteger(number) {
+  // Метод Math.round() возвращает число, округлённое к ближайшему целому.
+  return Math.round(number);
 }
 
 /**
  * Returns the integer part of a number by removing any fractional digits.
- *
+ * Возвращает целую часть числа, убрав десятичные дроби.
  * @param {number} number
  * @return {number}
  *
@@ -596,13 +615,18 @@ function roundToNearestInteger(/* number */) {
  * 5.4  => 5
  * -5.5 => -5
  */
-function getIntegerPartNumber(/* number */) {
-  throw new Error('Not implemented');
+function getIntegerPartNumber(number) {
+  // Функция Math.trunc() возвращает целую часть числа путём удаления всех дробных знаков.
+  return Math.trunc(number);
+  // Либо можно использовать приведение к целому типу данных:
+  // Функция parseInt() принимает строку в качестве аргумента
+  // и возвращает целое число в соответствии с указанным основанием системы счисления.
+  // return parseInt(number);
 }
 
 /**
  * Returns the sum of numbers.
- *
+ * Возвращает сумму переданных чисел.
  * @param {number} x1
  * @param {number} x2
  * @param {number} x3
@@ -612,13 +636,15 @@ function getIntegerPartNumber(/* number */) {
  * 1, 2, 3       => 6
  * 0.1, 0.2, 0.3 => 0.6
  */
-function getSumOfNumbers(/* x1, x2, x3 */) {
-  throw new Error('Not implemented');
+function getSumOfNumbers(x1, x2, x3) {
+  const res = x1 + x2 + x3;
+  // Метод toFixed() форматирует число, используя запись с фиксированной запятой.
+  return res.toFixed(1);
 }
 
 /**
  * Returns the largest number.
- *
+ * Возвращает наибольшее число из двух заданных.
  * @param {number} firstNumber
  * @param {number} secondNumber
  * @return {number}
@@ -628,13 +654,14 @@ function getSumOfNumbers(/* x1, x2, x3 */) {
  * -5, -6 => -5
  * 0, 5   => 5
  */
-function getMaxNumber(/* firstNumber, secondNumber */) {
-  throw new Error('Not implemented');
+function getMaxNumber(firstNumber, secondNumber) {
+  // Метод Math.max() возвращает наибольшее из нуля или более чисел.
+  return Math.max(firstNumber, secondNumber);
 }
 
 /**
  * Returns a random integer in the range from min to max.
- *
+ * Возвращает случайное целое число в диапазоне от min до max (включительно).
  * @param {number} min
  * @param {number} max
  * @return {number}
@@ -644,13 +671,23 @@ function getMaxNumber(/* firstNumber, secondNumber */) {
  * -5, 0 => -5 | -4 | -3 | -2 | -1 | 0
  * -1, 1 => -1 | 0 | 1
  */
-function getRandomInteger(/* min, max */) {
-  throw new Error('Not implemented');
+function getRandomInteger(min, max) {
+  // Используем Math.floor() для округления вниз и Math.random() для получения случайного числа от 0 до 1
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+  /*
+    В этой функции Math.random() возвращает случайное число от 0 (включительно) до 1 (исключительно).
+    Умножив его на разницу (max - min + 1), мы получаем случайное число в диапазоне от 0 до (max - min + 1).
+    Затем, прибавив min, мы смещаем результат, чтобы он оказался в нужном нам диапазоне.
+    И, наконец, Math.floor() используется для округления вниз до ближайшего целого числа.
+  */
 }
 
 /**
  * Returns the length of the hypotenuse of a right triangle.
- *
+ * Возвращает длину гипотенузы прямоугольного треугольника.
+ * Длина гипотенузы в прямоугольном треугольнике может быть найдена с использованием теоремы Пифагора:
+ * c =  √a^2 + b^2
+ * где 'c' - это длина гипотенузы, а 'a' и 'b' - длины катетов.
  * @param {number} a
  * @param {number} b
  * @return {number}
@@ -658,14 +695,15 @@ function getRandomInteger(/* min, max */) {
  * @example:
  * 3, 4 => 5
  */
-function getHypotenuse(/* a, b */) {
-  throw new Error('Not implemented');
+function getHypotenuse(a, b) {
+  // Метод Math.hypot() возвращает квадратный корень суммы квадратов своих аргументов, то есть
+  return Math.hypot(a, b);
 }
 
 /**
  * Returns count of odd numbers from zero to the resulting number.
  * The resulting number is taken into account.
- *
+ * Возвращает количество нечетных чисел от нуля до заданного числа (включительно).
  * @param {number} number
  * @return {number}
  *
@@ -677,6 +715,18 @@ function getHypotenuse(/* a, b */) {
  */
 function getCountOfOddNumbers(/* number */) {
   throw new Error('Not implemented');
+  /*
+    почему то не так решил....
+    let count = 0;
+
+    for (let i = 0; i <= number; i += 1) {
+      if (i % 2 !== 0) {
+        count += 1;
+      }
+    }
+
+    return count;
+  */
 }
 
 module.exports = {
